@@ -4,11 +4,11 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Run extractLocationArray.js",
+      "name": "Run GPSBabelToKoPpoMaiConverter.js",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}\\dist\\extractLocationArray.js",
+      "program": "${workspaceFolder}\\dist\\GPSBabelToKoPpoMaiConverter.js",
       "outFiles": [
         "${workspaceFolder}/dist/**/*.js.map"
       ],

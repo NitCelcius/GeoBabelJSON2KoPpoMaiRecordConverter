@@ -6,7 +6,7 @@
 
 - GPSログの取得には Android 端末を用いました
   - Google Pixel 8a, Android 15 (Build AP4A.250205.002)
-  - アプリは[GPS Logger](https://play.google.com/store/ap/details?id=eu.basicairdata.graziano.gpslogger)」を用いて、``.gpx`` ファイルとして出力しました
+  - アプリは [GPS Logger](https://play.google.com/store/ap/details?id=eu.basicairdata.graziano.gpslogger) を用いて、``.gpx`` ファイルとして出力しました
 - 続いて .gpx ファイル(XML) を [GPSBabel](https://www.gpsbabel.org) に読み込ませて、GeoJSON に変換します
   - Windows 11 23H2 (Build 22635.3737)
   - GPSBabel 1.10.0
@@ -20,7 +20,8 @@
 2. [Node.js](https://nodejs.org/) を導入します (npm も同時にインストールされます)
 3. このリポジトリのディレクトリでターミナルを開き ``npm install`` を実行します
 
-なお、このリポジトリでの開発には [PNPm](https://pnpm.io/) を利用しています。コードの編集が必要な際はこちらも導入してください。
+> [!NOTE]
+> なお、このリポジトリでの開発には [PNPm](https://pnpm.io/) を利用しています。コードの編集が必要な際はこちらも導入してください。
 
 ## 使い方
 
@@ -46,6 +47,10 @@ Error: properties.created_at がKoPpoMaiの形式ではありません
     - ``tt:mm`` はUTCタイムゾーンに対する時差の時間と分で、例えば ``Asia/Tokyo`` なら ``+09:00`` です
   - 例: ``2025-02-03T12:34:56+09:00``
 
+> [!NOTE]
+> KoPpoMai は**常にシステムのロケールとファイルに記載された時間が同じになることを前提**としていると考えられます。このスクリプトはタイムゾーンを考慮せず変換を行うことに注意してください。
+> GeoBabel で出力される日付時刻の形式は ``2025-02-03T12:34:56T+09:00`` のようにタイムゾーンが指定されていますが、このスクリプトを用いて変換を行う場合は Record を読み込ませた先のデバイスのタイムゾーンにおける ``2025-02-03T12:34:56`` が時刻として利用されます。
+
 ### ファイルやディレクトリが見当たらないエラーが出る
 
 ```plaintext
@@ -55,3 +60,4 @@ Error: ENOENT: no such file or directory
 - エラーの通り、GeoBabel で変換後のファイルの場所が間違っています。
   - ``src/GPSBabelToKoPpoMaiConverter.ts`` において、``INPUT_FILE_PATH: string`` の値を書き換えてください。
   - その後 ``tsc`` を実行してください。
+
